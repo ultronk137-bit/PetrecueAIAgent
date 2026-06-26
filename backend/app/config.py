@@ -37,6 +37,7 @@ class Settings(BaseSettings):
 
     # Firestore
     firestore_collection: str = Field(default="rescue_reports", alias="FIRESTORE_COLLECTION")
+    firestore_database: str = Field(default="(default)", alias="FIRESTORE_DATABASE")
 
     # Google Maps API (optional)
     google_maps_api_key: Optional[str] = Field(default=None, alias="GOOGLE_MAPS_API_KEY")

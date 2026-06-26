@@ -25,7 +25,10 @@ class FirestoreService:
     def __init__(self) -> None:
         self._settings = get_settings()
         if FirestoreService._client is None:
-            FirestoreService._client = firestore.AsyncClient(project=self._settings.gcp_project_id)
+            FirestoreService._client = firestore.AsyncClient(
+                project=self._settings.gcp_project_id,
+                database=self._settings.firestore_database,
+            )
         self._client = FirestoreService._client
         self._collection = self._client.collection(self._settings.firestore_collection)
 

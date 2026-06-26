@@ -78,10 +78,10 @@ class StorageService:
                 timeout=60
             )
 
-            # Make publicly accessible in thread pool
-            await asyncio.to_thread(blob.make_public)
-
-            public_url = blob.public_url
+            # Build public URL directly — relies on bucket-level allUsers:objectViewer
+            # IAM policy set during setup. Avoids make_public() which uses legacy ACLs
+            # and fails on buckets with uniform access or publicAccessPrevention.
+            public_url = f"https://storage.googleapis.com/{self._settings.gcs_bucket_name}/{blob_name}"
 
             logger.info(
                 "Image uploaded successfully",
@@ -99,20 +99,30 @@ class StorageService:
                 "GCS upload failed",
                 extra={
                     "report_id": report_id,
-                    "error": str(e)
+                    "error": str(e),
+                    "error_type": type(e).__name__,
+                    "bucket": self._settings.gcs_bucket_name,
+                    "project": self._settings.gcp_project_id,
                 }
             )
             raise ImageUploadException(
-                "Failed to upload image to cloud storage",
+                f"GCS upload failed: {str(e)}",
                 details={"gcs_error": str(e), "report_id": report_id}
             )
         except Exception as e:
             logger.error(
                 "Unexpected error during image upload",
-                extra={"report_id": report_id, "error": str(e)}
+                extra={
+                    "report_id": report_id,
+                    "error": str(e),
+                    "error_type": type(e).__name__,
+                    "bucket": self._settings.gcs_bucket_name,
+                    "project": self._settings.gcp_project_id,
+                },
+                exc_info=True
             )
             raise ImageUploadException(
-                "Unexpected error during image upload",
+                f"Unexpected GCS error: {str(e)}",
                 details={"error": str(e), "report_id": report_id}
             )
 
