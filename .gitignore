@@ -1,92 +1,19 @@
-# ── Environment & Secrets ────────────────────────────────────────────────────
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-service-account*.json
-gcp-credentials*.json
-credentials*.json
-
-# ── Python ───────────────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-eggs/
-parts/
-var/
-sdist/
-develop-eggs/
-.installed.cfg
-lib/
-lib64/
-MANIFEST
-
-# ── Virtual Environments ─────────────────────────────────────────────────────
+# Virtual environments
 venv/
 .venv/
-env/
-.env/
-ENV/
-virtualenv/
 
-# ── Package managers ─────────────────────────────────────────────────────────
-pip-log.txt
-pip-delete-this-directory.txt
-pip-wheel-metadata/
-.pip/
+# Environment files
+.env
+.env.local
 
-# ── Testing ──────────────────────────────────────────────────────────────────
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-coverage.xml
-*.cover
-nosetests.xml
-test-results/
-.tox/
+# Python cache
+__pycache__/
+*.py[cod]
 
-# ── Type checkers & linters ──────────────────────────────────────────────────
-.mypy_cache/
-.dmypy.json
-dmypy.json
-.ruff_cache/
-.pytype/
-
-# ── IDEs & editors ───────────────────────────────────────────────────────────
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
+
+# OS
 .DS_Store
 Thumbs.db
-
-# ── Docker ───────────────────────────────────────────────────────────────────
-.dockerignore
-docker-compose.override.yml
-
-# ── Logs ─────────────────────────────────────────────────────────────────────
-*.log
-logs/
-log/
-
-# ── Cloud & GCP ──────────────────────────────────────────────────────────────
-.gcloud/
-application_default_credentials.json
-
-# ── Jupyter ──────────────────────────────────────────────────────────────────
-.ipynb_checkpoints
-*.ipynb
-
-# ── Misc ─────────────────────────────────────────────────────────────────────
-*.tmp
-*.bak
-*.orig
-.cache/
